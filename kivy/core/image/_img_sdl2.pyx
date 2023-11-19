@@ -8,10 +8,10 @@ from libc.stdlib cimport malloc
 cdef int _is_init = 0
 
 cdef struct SDL_RWops:
-    long (* seek) (SDL_RWops * context, long offset,int whence)
-    size_t(* read) ( SDL_RWops * context, void *ptr, size_t size, size_t maxnum)
-    size_t(* write) (SDL_RWops * context, void *ptr,size_t size, size_t num)
-    int (* close) (SDL_RWops * context)
+    long (* seek) (SDL_RWops * context, long offset,int whence) except +1
+    size_t(* read) ( SDL_RWops * context, void *ptr, size_t size, size_t maxnum) except +1
+    size_t(* write) (SDL_RWops * context, void *ptr,size_t size, size_t num) except +1
+    int (* close) (SDL_RWops * context) except +1
 
 
 cdef size_t rwops_bytesio_write(SDL_RWops *context, const void *ptr, size_t size, size_t num) noexcept:
